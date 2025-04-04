@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist - Kanha Fashion Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .header-bg {
+        background-color: #eaf4f4; /* Soft pastel green */
+      }
+      .primary-text {
+        color: #2c3e50; /* Dark gray-blue for text */
+      }
+      .button-primary {
+        background-color: #2c3e50; /* Dark gray-blue for buttons */
+        color: #ffffff;
+      }
+      .button-primary:hover {
+        background-color: #34495e; /* Slightly darker shade on hover */
+      }
+      .card-bg {
+        background-color: #ffffff; /* White background for cards */
+      }
+      .card-border {
+        border-color: #d1e8e2; /* Light pastel green border */
+      }
+    </style>
+  </head>
+  <body class="bg-white text-gray-800 min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="header-bg py-4 shadow-md">
+      <div class="container mx-auto flex justify-between items-center px-4">
+        <!-- Logo -->
+        <a
+          href="./index.html"
+          class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-800 via-blue-600 to-gray-800 drop-shadow-lg"
+        >
+          Kanha Fashion Hub
+        </a>
+
+        <!-- Navigation Links -->
+        <div class="flex space-x-6"></div>
+      </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="header-bg p-6 text-center">
+      <h1 class="text-3xl sm:text-4xl font-bold primary-text">Your Wishlist</h1>
+      <p class="text-gray-600 mt-2">View and manage your favorite items.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main
+      class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+      id="wishlist-section"
+    >
+      <!-- Wishlist Items will be dynamically generated here -->
+    </main>
+
+    <div class="text-center mt-6">
+      <button
+        onclick="addWishlistToCart()"
+        class="button-primary px-6 py-3 rounded-lg font-semibold text-sm"
+      >
+        Add All to Cart
+      </button>
+    </div>
+
+    <script>
+      const wishlistSection = document.getElementById("wishlist-section");
+
+      // Load wishlist items from localStorage
+      const wishlistItems = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+      if (wishlistItems.length === 0) {
+        wishlistSection.innerHTML = `
+          <p class="text-gray-600 text-center col-span-full">
+            Your wishlist is empty. Start adding your favorite items!
+          </p>
+        `;
+      } else {
+        wishlistItems.forEach((item, index) => {
+          const wishlistDiv = document.createElement("div");
+          wishlistDiv.className =
+            "card-bg p-4 rounded-lg shadow-lg border card-border hover:shadow-2xl transition-shadow duration-300";
+
+          wishlistDiv.innerHTML = `
+            <img
+              src="${item.image}"
+              alt="Wishlist Item"
+              class="w-full h-48 object-cover rounded-lg shadow-md"
+            />
+            <div class="mt-4">
+              <p class="text-gray-600 text-sm">Price: ₹${item.price}</p>
+            </div>
+            <div class="mt-4 flex justify-between items-center">
+              <button
+                class="text-xs bg-gray-200 px-2 py-1 rounded-lg hover:bg-gray-300"
+                onclick="removeFromWishlist(${index})"
+              >
+                Remove
+              </button>
+              <button
+                class="text-xs bg-gray-200 px-2 py-1 rounded-lg hover:bg-gray-300"
+                onclick="addToCart(${index})"
+              >
+                Add to Cart
+              </button>
+            </div>
+          `;
+
+          wishlistSection.appendChild(wishlistDiv);
+        });
+      }
+
+      // Function to remove an item from the wishlist
+      function removeFromWishlist(index) {
+        wishlistItems.splice(index, 1);
+        localStorage.setItem("wishlist", JSON.stringify(wishlistItems));
+        alert("Item removed from wishlist!");
+        location.reload(); // Reload the page to update the wishlist
+      }
+
+      // Function to add an item to the cart
+      function addToCart(index) {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push(wishlistItems[index]);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Item added to cart!");
+      }
+
+      // Function to add all wishlist items to the cart
+      function addWishlistToCart() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        wishlistItems.forEach((item) => {
+          cart.push(item);
+        });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.removeItem("wishlist"); // Clear the wishlist after adding to cart
+        alert("All wishlist items added to cart!");
+        location.reload(); // Reload the page to update the wishlist
+      }
+    </script>
+  </body>
+</html>

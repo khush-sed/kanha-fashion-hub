@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proceed to Pay - Kanha Fashion Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .header-bg {
+        background-color: #eaf4f4; /* Soft pastel green */
+      }
+      .primary-text {
+        color: #2c3e50; /* Dark gray-blue for text */
+      }
+      .button-primary {
+        background-color: #2c3e50; /* Dark gray-blue for buttons */
+        color: #ffffff;
+      }
+      .button-primary:hover {
+        background-color: #34495e; /* Slightly darker shade on hover */
+      }
+    </style>
+  </head>
+  <body class="bg-white text-gray-800 min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="header-bg py-4 shadow-md">
+      <div class="container mx-auto flex justify-between items-center px-4">
+        <!-- Logo -->
+        <a
+          href="./index.html"
+          class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-800 via-blue-600 to-gray-800 drop-shadow-lg"
+        >
+          Kanha Fashion Hub
+        </a>
+
+        <!-- Navigation Links -->
+        <div class="flex space-x-6"></div>
+      </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="header-bg p-6 text-center">
+      <h1 class="text-3xl sm:text-4xl font-bold primary-text">
+        Proceed to Pay
+      </h1>
+    </header>
+
+    <!-- Main Content -->
+    <main class="p-6 flex justify-center">
+      <div
+        class="bg-white p-6 rounded-lg shadow-2xl border border-gray-300 max-w-sm w-full"
+      >
+        <h2 class="text-lg font-semibold primary-text text-center mb-4">
+          Total Price: ₹<span id="total-price">0</span>
+        </h2>
+
+        <!-- QR Code Section -->
+        <div id="qr-code-section" class="hidden text-center">
+          <h3 class="text-lg font-semibold primary-text mb-4">Scan QR Code</h3>
+          <img
+            src="qr.jpg"
+            alt="QR Code"
+            class="w-48 h-48 mx-auto mb-4 border border-gray-300 rounded-lg shadow-md"
+          />
+          <p class="text-gray-600 text-sm">
+            Scan the QR code above to complete your payment.
+          </p>
+        </div>
+
+        <!-- Complete Payment Button -->
+        <button
+          id="complete-payment-button"
+          onclick="completePayment()"
+          class="button-primary px-4 py-2 rounded-lg font-semibold mt-4 w-full"
+        >
+          Complete Payment
+        </button>
+      </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="header-bg py-6 mt-16">
+      <div class="container mx-auto text-center">
+        <p class="text-sm primary-text">
+          © 2025 Kanha Fashion Hub. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Retrieve total price from localStorage
+      const proceedToPayTotalPrice = localStorage.getItem(
+        "proceedToPayTotalPrice"
+      );
+      const totalPriceElement = document.getElementById("total-price");
+      const qrCodeSection = document.getElementById("qr-code-section");
+      const completePaymentButton = document.getElementById(
+        "complete-payment-button"
+      );
+
+      // Display the total price
+      if (proceedToPayTotalPrice) {
+        totalPriceElement.textContent = proceedToPayTotalPrice;
+      } else {
+        totalPriceElement.textContent = "0"; // Default to 0 if no total price is found
+      }
+
+      // Show QR Code for UPI payment
+      function showQRCode() {
+        qrCodeSection.classList.remove("hidden"); // Show the QR code section
+        completePaymentButton.textContent = "Payment Completed"; // Update button text
+      }
+
+      // Function to complete payment
+      function completePayment() {
+        if (!qrCodeSection.classList.contains("hidden")) {
+          alert("Payment completed successfully via UPI!");
+        } else {
+          alert("Payment completed successfully!");
+        }
+        localStorage.removeItem("proceedToPayTotalPrice"); // Clear the total price after payment
+        window.location.href = "order-confirmation.html"; // Redirect to order confirmation page
+      }
+
+      // Automatically show QR code if UPI is selected
+      document.addEventListener("DOMContentLoaded", () => {
+        const paymentMethod = localStorage.getItem("selectedPaymentMethod");
+        if (paymentMethod === "UPI") {
+          showQRCode();
+        }
+      });
+    </script>
+  </body>
+</html>
