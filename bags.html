@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bags</title>
+    <script
+      src="https://kit.fontawesome.com/YOUR_KIT_ID.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body class="bg-white text-gray-800 min-h-screen">
+    <div id="header"></div>
+
+         
+    <!-- Header Section -->
+    <header class="header-bg p-6 text-center">
+      <h1 class="text-3xl sm:text-4xl font-bold primary-text">Stylish Bags</h1>
+      <p class="text-gray-600 mt-2">Elegant bags to complement your style.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main
+      class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+      id="bags-section"
+    >
+      <!-- Bags Items will be dynamically generated here -->
+    </main>
+
+     <!-- Footer Section -->
+   <footer class="header-bg py-4 shadow-md text-gray-800">
+  <!-- Top Icon Section -->
+  <div class="flex flex-col md:flex-row justify-around text-center py-8 border-b border-gray-300">
+    <div class="flex flex-col items-center mb-6 md:mb-0">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+</svg>
+
+      <p class="font-semibold">FREE SHIPPING</p>
+    </div>
+    <div class="flex flex-col items-center mb-6 md:mb-0">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
+</svg>
+
+      <p class="font-semibold">15 DAYS RETURNS</p>
+    </div>
+    <div class="flex flex-col items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+</svg>
+
+      <p class="font-semibold">COD AVAILABLE</p>
+    </div>
+  </div>
+
+  
+ 
+
+  <!-- Links Section -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-6 py-10 text-sm border-b border-gray-300">
+    <div>
+      <h3 class="font-bold mb-3">ABOUT KANHA FASHION HUB</h3>
+      <div class="w-full lg:w-1/2 text-center lg:text-left">
+          <p class="text-lg text-gray-600 mb-6">
+            Kanha Fashion Hub is a one-stop destination for all your fashion
+            needs. 
+          </p>
+          
+        </div>
+    </div> <!-- Empty to push next sections right -->
+    <div>
+      <h3 class="font-bold mb-3">INFORMATION</h3>
+      <ul class="space-y-2">
+        <li><a href="about.html" class="hover:underline">About us</a></li>
+        
+        <li><a href="terms.html" class="hover:underline">Terms and Conditions</a></li>
+        <li><a href="delivery.html" class="hover:underline">Delivery Policy</a></li>
+        <li><a href="privacy.html" class="hover:underline">Privacy Policy</a></li>
+        <li><a href="return.html" class="hover:underline">Return/Exchange Policy</a></li>
+        
+
+
+
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-bold mb-3">MY ACCOUNT</h3>
+      <ul class="space-y-2">
+        <li><a href="wishlist.html" class="hover:underline">Wishlist</a></li>
+        <li><a href="my-profile.html" class="hover:underline">Your Account</a></li>
+        <li><a href="add-to-cart.html" class="hover:underline">Cart</a></li>
+        <li><a href="login.html" class="hover:underline">Login</a></li>
+        <li><a href="signup.html" class="hover:underline">Registration</a></li>
+        <li><a href="store.html" class="hover:underline">Our Store</a></li>
+      </ul>
+    </div>
+   
+ <div class="px-4 lg:px-0 max-w-3xl mx-auto">
+  <!-- Office Address -->
+  <div class="mb-6">
+    <h3 class="text-lg font-bold mb-2 text-gray-800">KANHA FASHION HUB OFFICE:</h3>
+    <p class="text-gray-700 leading-relaxed">
+      Near Bazar India, Main Vindhyanagar Road<br>
+      Waidhan, Distt.-Singrauli (M.P) 486 886, India
+    </p>
+  </div>
+
+  <!-- WhatsApp Contact -->
+  <div class="mb-6">
+    <h3 class="text-lg font-bold mb-2 text-gray-800">WHATSAPP US:</h3>
+    <p class="text-gray-700">+91-97534 47832</p>
+  </div>
+
+  <!-- Store Hours -->
+  <div>
+    <h3 class="text-lg font-bold mb-2 text-gray-800">STORE HOURS:</h3>
+    <p class="text-gray-700">Monday - Sunday: 10:00 AM - 9:00 PM</p>
+  </div>
+</div>
+
+<div>
+        <p class="text-sm primary-text">
+          © 2025 Kanha Fashion Hub. All rights reserved.
+        </p>
+         </div>
+</footer>
+
+
+    <script>
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      const bagsSection = document.getElementById("bags-section");
+
+      // Manually defined prices for each bag
+      const prices = Array.from({ length: 50 }, (_, i) => 1500 + i * 100);
+
+      for (let i = 1; i <= 50; i++) {
+        const price = prices[i - 1]; // Get the price for the current product
+
+        const bagDiv = document.createElement("div");
+        bagDiv.className =
+          "bg-white p-4 rounded-lg shadow-lg border card-border hover:shadow-2xl transition-shadow duration-300 cursor-pointer";
+
+        bagDiv.innerHTML = `
+        <a
+          href="product-details.html?category=bags&productId=${i}&price=${price}"
+        >
+          <img
+            src="images/bags/bag${i}.jpg"
+            alt="Bag ${i}"
+            class="w-full h-48 object-cover rounded-lg shadow-md"
+          />
+          <h2 class="text-lg font-semibold primary-text mt-4">Bag ${i}</h2>
+          <p class="text-gray-600 mt-2">Price: ₹${price}</p>
+        </a>
+        <div class="mt-4">
+          <p class="text-gray-600 text-sm">Price: ₹${price}</p>
+        </div>
+        <div class="mt-4 flex justify-between items-center">
+          <button
+            class="text-xs bg-gray-200 px-2 py-1 rounded-lg hover:bg-gray-300"
+            onclick="addToWishlist(${i}, ${price}, 'images/bags/bag${i}.jpg')"
+          >
+            Wishlist
+          </button>
+          <button
+            class="text-xs bg-gray-200 px-2 py-1 rounded-lg hover:bg-gray-300"
+            onclick="addToCart(${i}, ${price}, 'images/bags/bag${i}.jpg')"
+          >
+            Add to Cart
+          </button>
+        </div>
+      `;
+
+        bagsSection.appendChild(bagDiv);
+      }
+
+      // Menu toggle functionality
+      const menuToggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("menu");
+      const menuOverlay = document.getElementById("menu-overlay");
+
+      menuToggle.addEventListener("click", () => {
+        menu.classList.toggle("-translate-x-full");
+        menuOverlay.classList.toggle("hidden");
+      });
+
+      menuOverlay.addEventListener("click", () => {
+        menu.classList.add("-translate-x-full");
+        menuOverlay.classList.add("hidden");
+      });
+
+      // Function to add product to wishlist
+      function addToWishlist(id, price, image) {
+        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        const product = { id, price, image };
+        wishlist.push(product);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        alert("Product added to wishlist!");
+      }
+
+      // Function to add product to cart
+      function addToCart(id, price, image) {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+        if (isLoggedIn === "true") {
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          cart.push({ id, price, image });
+          localStorage.setItem("cart", JSON.stringify(cart));
+          alert("Product added to cart!");
+        } else {
+          alert("You must log in to add this product to your cart!");
+          window.location.href = "./login.html";
+        }
+      }
+    </script>
+  </body>
+</html>

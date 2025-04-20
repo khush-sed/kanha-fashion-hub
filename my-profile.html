@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>profile</title>
+    <script
+      src="https://kit.fontawesome.com/YOUR_KIT_ID.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  
+    <body class="bg-white text-gray-800 min-h-screen">
+    <div id="header"></div>
+
+   
+
+      <!-- Profile Section -->
+<section class="container mx-auto mt-16 px-4 py-10 bg-white rounded-2xl shadow-2xl">
+  <h1 class="text-4xl font-bold text-center text-gray-800 mb-10">
+    My Profile
+  </h1>
+
+  <div class="flex flex-col lg:flex-row items-center gap-10">
+    <!-- Profile Picture -->
+    <div class="w-full lg:w-1/3 text-center">
+      <img
+        id="profile-picture"
+        src="./profile-placeholder.png"
+        alt="Profile Picture"
+        class="rounded-full shadow-xl w-44 h-44 object-cover mx-auto transition-transform duration-300 hover:scale-105"
+      />
+      <label
+        for="upload-picture"
+        class="bg-blue-600 text-white mt-4 inline-block px-5 py-2 rounded-lg font-medium cursor-pointer hover:bg-blue-700"
+      >
+        Edit Picture
+      </label>
+      <input
+        type="file"
+        id="upload-picture"
+        accept="image/*"
+        class="hidden"
+        onchange="updateProfilePicture(event)"
+      />
+    </div>
+
+    <!-- Profile Info -->
+    <div class="w-full lg:w-2/3 space-y-6">
+      <!-- Name -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+        <div class="relative">
+          <input
+            type="text"
+            id="profile-name"
+            class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <div class="absolute left-3 top-2.5 text-gray-400">
+            <!-- <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M5.121 17.804A12.082 12.082 0 0012 20c2.5 0 4.847-.764 6.879-2.196M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <div class="relative">
+          <input
+            type="email"
+            id="profile-email"
+            class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <div class="absolute left-3 top-2.5 text-gray-400">
+            <!-- <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M16 12H8m8 0a4 4 0 10-8 0 4 4 0 008 0z" />
+            </svg> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+        <div class="relative">
+          <input
+            type="tel"
+            id="profile-phone"
+            class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <div class="absolute left-3 top-2.5 text-gray-400">
+            <!-- <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 5h2l3 7-1.5 2.5m6-11L17 4l3 4-6 3 1.5 2.5M12 19h0" />
+            </svg> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="text-center mt-4 flex flex-col gap-4 sm:flex-row sm:justify-center">
+  <button
+    onclick="saveProfile()"
+    class="button-primary px-6 py-3 rounded-lg font-semibold"
+  >
+    Save Changes
+  </button>
+
+  <a
+    href="my-orders.html"
+    class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-200 inline-block"
+  >
+    View My Orders
+  </a>
+
+  <button
+    onclick="logout()"
+    class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition duration-200 inline-block"
+  >
+    Logout
+  </button>
+</div>
+
+
+      <!-- Confirmation Message -->
+      <p id="save-confirmation" class="text-center text-green-600 font-semibold hidden">
+        ✔ Profile saved successfully!
+      </p>
+      
+    </div>
+  </div>
+</section>
+
+ 
+
+     <!-- Footer Section -->
+   <footer class="header-bg py-4 shadow-md text-gray-800">
+  <!-- Top Icon Section -->
+  <div class="flex flex-col md:flex-row justify-around text-center py-8 border-b border-gray-300">
+    <div class="flex flex-col items-center mb-6 md:mb-0">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+</svg>
+
+      <p class="font-semibold">FREE SHIPPING</p>
+    </div>
+    <div class="flex flex-col items-center mb-6 md:mb-0">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
+</svg>
+
+      <p class="font-semibold">15 DAYS RETURNS</p>
+    </div>
+    <div class="flex flex-col items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+</svg>
+
+      <p class="font-semibold">COD AVAILABLE</p>
+    </div>
+  </div>
+
+  
+ 
+
+  <!-- Links Section -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-6 py-10 text-sm border-b border-gray-300">
+    <div>
+      <h3 class="font-bold mb-3">ABOUT KANHA FASHION HUB</h3>
+      <div class="w-full lg:w-1/2 text-center lg:text-left">
+          <p class="text-lg text-gray-600 mb-6">
+            Kanha Fashion Hub is a one-stop destination for all your fashion
+            needs. 
+          </p>
+          
+        </div>
+    </div> <!-- Empty to push next sections right -->
+    <div>
+      <h3 class="font-bold mb-3">INFORMATION</h3>
+      <ul class="space-y-2">
+        <li><a href="about.html" class="hover:underline">About us</a></li>
+        
+        <li><a href="terms.html" class="hover:underline">Terms and Conditions</a></li>
+        <li><a href="delivery.html" class="hover:underline">Delivery Policy</a></li>
+        <li><a href="privacy.html" class="hover:underline">Privacy Policy</a></li>
+        <li><a href="return.html" class="hover:underline">Return/Exchange Policy</a></li>
+        
+
+
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-bold mb-3">MY ACCOUNT</h3>
+      <ul class="space-y-2">
+        <li><a href="wishlist.html" class="hover:underline">Wishlist</a></li>
+        <li><a href="my-profile.html" class="hover:underline">Your Account</a></li>
+        <li><a href="add-to-cart.html" class="hover:underline">Cart</a></li>
+        <li><a href="login.html" class="hover:underline">Login</a></li>
+        <li><a href="signup.html" class="hover:underline">Registration</a></li>
+        <li><a href="store.html" class="hover:underline">Our Store</a></li>
+      </ul>
+    </div>
+   
+ <div class="px-4 lg:px-0 max-w-3xl mx-auto">
+  <!-- Office Address -->
+  <div class="mb-6">
+    <h3 class="text-lg font-bold mb-2 text-gray-800">KANHA FASHION HUB OFFICE:</h3>
+    <p class="text-gray-700 leading-relaxed">
+      Near Bazar India, Main Vindhyanagar Road<br>
+      Waidhan, Distt.-Singrauli (M.P) 486 886, India
+    </p>
+  </div>
+
+  <!-- WhatsApp Contact -->
+  <div class="mb-6">
+    <h3 class="text-lg font-bold mb-2 text-gray-800">WHATSAPP US:</h3>
+    <p class="text-gray-700">+91-97534 47832</p>
+  </div>
+
+  <!-- Store Hours -->
+  <div>
+    <h3 class="text-lg font-bold mb-2 text-gray-800">STORE HOURS:</h3>
+    <p class="text-gray-700">Monday - Sunday: 10:00 AM - 9:00 PM</p>
+  </div>
+</div>
+
+<div>
+        <p class="text-sm primary-text">
+          © 2025 Kanha Fashion Hub. All rights reserved.
+        </p>
+         </div>
+</footer>
+<script>
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+     
+    </script>
+
+    <script>
+  function loadProfile() {
+    const profilePicture = document.getElementById("profile-picture");
+    const profileName = document.getElementById("profile-name");
+    const profileEmail = document.getElementById("profile-email");
+    const profilePhone = document.getElementById("profile-phone");
+
+    const savedProfile = JSON.parse(localStorage.getItem("profile")) || {};
+
+    if (savedProfile.picture) profilePicture.src = savedProfile.picture;
+    profileName.value = savedProfile.name || "";
+    profileEmail.value = savedProfile.email || "";
+    profilePhone.value = savedProfile.phone || "";
+  }
+
+  function updateProfilePicture(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const profilePicture = document.getElementById("profile-picture");
+        profilePicture.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function saveProfile() {
+    const profilePicture = document.getElementById("profile-picture").src;
+    const profileName = document.getElementById("profile-name").value;
+    const profileEmail = document.getElementById("profile-email").value;
+    const profilePhone = document.getElementById("profile-phone").value;
+
+    const profileData = {
+      picture: profilePicture,
+      name: profileName,
+      email: profileEmail,
+      phone: profilePhone,
+    };
+
+    localStorage.setItem("profile", JSON.stringify(profileData));
+
+    const confirmation = document.getElementById("save-confirmation");
+    confirmation.classList.remove("hidden");
+    setTimeout(() => confirmation.classList.add("hidden"), 3000);
+  }
+
+  function resetProfile() {
+    localStorage.removeItem("profile");
+    document.getElementById("profile-picture").src = "./profile-placeholder.png";
+    document.getElementById("profile-name").value = "";
+    document.getElementById("profile-email").value = "";
+    document.getElementById("profile-phone").value = "";
+    alert("Profile reset successfully.");
+  }
+
+  window.onload = loadProfile;
+</script>
+
+<script>
+  function logout() {
+    // Clear login status from localStorage
+    localStorage.removeItem("isLoggedIn");
+
+    // Optionally, redirect to the homepage or login page
+    window.location.href = "./index.html"; // Redirect to the homepage (adjust if needed)
+
+    // Hide logout button after logging out
+    document.getElementById("logoutButton").classList.add("hidden");
+  }
+</script>
+
+
+  </body>
+</html>

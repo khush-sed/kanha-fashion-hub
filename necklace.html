@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Necklaces</title>
+    <script
+      src="https://kit.fontawesome.com/YOUR_KIT_ID.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body class="bg-white text-gray-800 min-h-screen">
+    <div id="header"></div>
+
+    <header class="header-bg p-6 text-center">
+      <h1 class="text-3xl sm:text-4xl font-bold primary-text">
+        Graceful Necklaces
+      </h1>
+      <p class="text-gray-600 mt-2">Jewelry to compliment every style.</p>
+    </header>
+
+    <main
+      class="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+      id="necklace-section"
+    ></main>
+
+    <div id="footer"></div>
+
+    <script>
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+        });
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+
+      const necklaceSection = document.getElementById("necklace-section");
+      const prices = Array.from({ length: 50 }, (_, i) => 500 + i * 70);
+
+      for (let i = 1; i <= 50; i++) {
+        const price = prices[i - 1];
+        const necklaceDiv = document.createElement("div");
+        necklaceDiv.className =
+          "bg-white p-4 rounded-lg shadow-lg border card-border hover:shadow-2xl transition-shadow duration-300 cursor-pointer";
+
+        necklaceDiv.innerHTML = `
+          <a href="product-details.html?category=necklace&productId=${i}&price=${price}">
+            <img src="images/necklace/necklace${i}.jpg" alt="Necklace ${i}" class="w-full h-48 object-cover rounded-lg shadow-md" />
+            <h2 class="text-lg font-semibold primary-text mt-4">Necklace ${i}</h2>
+            <p class="text-gray-600 mt-2">Price: ₹${price}</p>
+          </a>
+          <div class="mt-4 flex justify-between items-center">
+            <button class="text-xs bg-gray-200 px-2 py-1 rounded-lg hover:bg-gray-300"
+              onclick="addToWishlist(${i}, ${price}, 'images/necklace/necklace${i}.jpg')">Wishlist</button>
+            <button class="text-xs bg-gray-200 px-2 py-1 rounded-lg hover:bg-gray-300"
+              onclick="addToCart(${i}, ${price}, 'images/necklace/necklace${i}.jpg')">Add to Cart</button>
+          </div>
+        `;
+
+        necklaceSection.appendChild(necklaceDiv);
+      }
+
+      function addToWishlist(id, price, image) {
+        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        wishlist.push({ id, price, image });
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        alert("Product added to wishlist!");
+      }
+
+      function addToCart(id, price, image) {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn === "true") {
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          cart.push({ id, price, image });
+          localStorage.setItem("cart", JSON.stringify(cart));
+          alert("Product added to cart!");
+        } else {
+          alert("You must log in to add this product to your cart!");
+          window.location.href = "./login.html";
+        }
+      }
+    </script>
+  </body>
+</html>

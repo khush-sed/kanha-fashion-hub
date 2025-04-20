@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details - Kanha Fashion Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-white text-gray-800">
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Product Detail Section -->
+    <main
+      class="max-w-6xl mx-auto p-6 mt-10 grid grid-cols-1 md:grid-cols-2 gap-10"
+    >
+      <!-- Left: Media Gallery -->
+      <div>
+        <div class="border rounded-lg overflow-hidden">
+          <div
+            id="main-media"
+            class="w-full h-[400px] flex items-center justify-center bg-gray-100"
+          ></div>
+        </div>
+
+        <div id="thumbnails" class="flex gap-2 mt-4 overflow-x-auto"></div>
+      </div>
+
+      <!-- Right: Product Info -->
+      <div class="space-y-4">
+        <h1 id="product-name" class="text-2xl font-bold">Product Name</h1>
+        <p id="product-price" class="text-xl text-gray-700">Price: ₹</p>
+
+        <div class="flex gap-4">
+          <button
+            id="wishlist-btn"
+            class="bg-[#2c3e50] text-white px-4 py-2 rounded hover:bg-[#34495e]"
+          >
+            Add to Wishlist
+          </button>
+          <button
+            id="cart-btn"
+            class="bg-[#2c3e50] text-white px-4 py-2 rounded hover:bg-[#34495e]"
+          >
+            Add to Cart
+          </button>
+        </div>
+
+        <div>
+          <h2 class="text-lg font-bold">Product Description</h2>
+          <p class="text-gray-600">
+            This is a premium product perfect for your style and comfort.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <script>
+      // Header & Footer Load
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("header").innerHTML = data));
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("footer").innerHTML = data));
+
+      // Get the product details from the URL params
+      const urlParams = new URLSearchParams(window.location.search);
+      const category = urlParams.get("category");
+      const productId = urlParams.get("productId");
+      const price = urlParams.get("price");
+      const mediaParam = urlParams.get("media");
+
+      const productName = `${category.slice(0, -1).toUpperCase()} ${productId}`;
+      const mediaItems = mediaParam
+        ? mediaParam.split(",")
+        : [`${category.slice(0, -1)}${productId}.jpg`];
+
+      document.getElementById("product-name").textContent = productName;
+      document.getElementById("product-price").textContent = `Price: ₹${price}`;
+
+      const mainMediaDiv = document.getElementById("main-media");
+      const thumbnailsDiv = document.getElementById("thumbnails");
+
+      // Function to render media
+      function renderMedia(src) {
+        const ext = src.split(".").pop();
+        mainMediaDiv.innerHTML =
+          ext === "mp4"
+            ? `<video controls class="w-full h-full object-contain"><source src="images/${category}/${src}" type="video/mp4"></video>`
+            : `<img src="images/${category}/${src}" class="w-full h-full object-contain" />`;
+      }
+
+      mediaItems.forEach((src, index) => {
+        const ext = src.split(".").pop();
+        const thumb = document.createElement("div");
+        thumb.className =
+          "w-20 h-20 border rounded overflow-hidden cursor-pointer";
+        thumb.innerHTML =
+          ext === "mp4"
+            ? `<video muted class="w-full h-full object-cover"><source src="images/${category}/${src}" type="video/mp4"></video>`
+            : `<img src="images/${category}/${src}" class="w-full h-full object-cover" />`;
+        thumb.onclick = () => renderMedia(src);
+        thumbnailsDiv.appendChild(thumb);
+      });
+
+      // Show first media
+      renderMedia(mediaItems[0]);
+
+      // Wishlist Button functionality
+      document.getElementById("wishlist-btn").addEventListener("click", () => {
+        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        wishlist.push({ id: productId, price, image: mediaItems[0], category });
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        alert("Added to wishlist!");
+      });
+
+      // Add to Cart Button functionality
+      document.getElementById("cart-btn").addEventListener("click", () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn === "true") {
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          // Add the product details to the cart
+          cart.push({
+            id: productId,
+            price: price,
+            image: mediaItems[0], // or choose a different image if needed
+            category: category,
+          });
+          // Save the updated cart back to localStorage
+          localStorage.setItem("cart", JSON.stringify(cart));
+          alert("Added to cart!");
+        } else {
+          alert("Please log in to add to cart.");
+          window.location.href = "./login.html"; // Redirect to login page if not logged in
+        }
+      });
+    </script>
+  </body>
+</html>
